@@ -58,6 +58,7 @@ class RegistrationController {
         $validation_results = $this->userDataValidation($this->username, $this->email, $this->password);
         if ($validation_results['username'] && $validation_results['email'] && $validation_results['password']) 
         { // everything is valid
+            // create user 
             // go to login page
             echo 'go to login page';
         }

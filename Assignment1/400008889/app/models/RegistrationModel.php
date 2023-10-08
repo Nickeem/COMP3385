@@ -4,11 +4,11 @@ spl_autoload_register();
 
 class RegistrationModel extends Model {
 
-     private $db; 
+     //private $db; 
 
      public function __construct()
      {
-         $this->db = $this->connect(); 
+        $this->connect(); 
      } // constructor
 
      public function register($username, $password, $email) 

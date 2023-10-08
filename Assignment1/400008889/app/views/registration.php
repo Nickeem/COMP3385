@@ -13,7 +13,7 @@
        }
        
        if(!$validation_results['password']) {
-            $password_error = 'The passord must be at least 10 characters, contain a number and uppercase character';
+            $password_error = 'The password must be at least 10 characters, contain a number and uppercase character';
        }
     }
 ?>
@@ -24,10 +24,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../css/pico.min.css">
+    <link rel="stylesheet" href="../css/style.css">
     <title>Registration</title>
 </head>
 <body>
     <main class="container">
+        <h1>Registration</h1>
     <form action="index.php" method="post">
         
 
@@ -53,10 +55,14 @@
             <small class="error password <?php if ($email_error != '') {echo 'show';}?>"> <?php echo $password_error ?></small>
         </label>
        
-     
+        <div class="grid">
+        <div></div>
+        <input type="submit"  value="Register" role="button">
+        <div></div>
+        </div>
      
         <!--<label for="confirm_password"><input type="text" id="confirm_password"></label> -->
-        <input type="submit"  value="Register">
+        
    
 </form>
     </main>
