@@ -21,19 +21,26 @@
 <body>
     <main class="container">
         <h1>Login</h1>
-        <form action="">
+        <form action="./" method="post">
             <label for="email">Enter Email </label>
-            <input type="email" name="email" required>
+            <input type="email" name="email" id="email" required>
 
 
             <label for="password">Enter password </label>
-            <input type="password"  name="password" required>     
+            <input type="password"  name="password" id="password" required>     
 
             <small class="error password "> <?php echo $login_error ?></small>
 
             <div class="grid">
                 <div></div>
-                <input type="submit" value="Login">
+                <div>
+                    <input type="submit" value="Login">
+                    <p>
+                        <a href="../Registration/">Register</a>
+                    </p>
+                    
+                </div>
+                
                 <div></div>
             </div>
         </form>

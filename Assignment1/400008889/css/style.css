@@ -42,3 +42,18 @@
 .flex-container:only-child  {
     display: flex; /* Make it take up the entire row */
 }
+
+
+ p {
+    text-align: center;
+}
+
+header > .flex-container {
+    display: flex;
+    justify-content: space-between;
+
+}
+
+header {
+    padding: 20px !important;
+}

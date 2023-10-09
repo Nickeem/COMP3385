@@ -9,8 +9,12 @@ class LoginController {
     public function __construct()
     {
         $this->model = new LoginModel;   
-        $this->password = "password";//$_POST['password'];
-        $this->email = "nickeem.payne@gmail.com";//$_POST['email'];
+    }
+
+    public function getData() 
+    {
+        $this->email = $_POST['email'];
+        $this->password = $_POST['password'];
     }
 
     public function isLoginValid() : bool
@@ -22,19 +26,36 @@ class LoginController {
     {
         if($this->isLoginValid())
         {
-
             session_regenerate_id();
 		    $_SESSION['loggedin'] = TRUE;
-		    $_SESSION['username'] = $this->model->fetchUsername($this->email, $this->password);
+		    $userData = $this->model->fetchUserData($this->email, $this->password);
+		    $_SESSION['username'] = $userData['username'];
+		    $_SESSION['email'] = $userData['email'];
             // start session and get some session info
-            echo $_SESSION['username'];
+            header('Location: ../');
+
         }
         else 
         {
             $isLoginValid = false;
             // return to login page and show error
-            include_once './views/registration.php';
+            include_once '../views/login.php';
             
+        }
+    }
+
+    public function index()
+    {
+        session_start();
+        if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['email']) && isset($_POST['password']) ) 
+        {
+            $this->getData();
+            $this->loginUser();
+
+        }
+        else
+        {
+            include_once '../views/login.php';
         }
     }
 }
@@ -49,4 +70,3 @@ else
 {
     echo 'incorrect credentials';
 }*/
-echo __DIR__;

@@ -21,16 +21,17 @@ class LoginModel extends Model {
         return $isPasswordValid;
     }
 
-    public function fetchUsername($email, $password) 
+    public function fetchUserData($email, $password) 
     {
-        $username = "";
+        $userData = array();
         if($this->authenticateUser($email, $password))
         {
-            $stmt = $this->db->prepare("SELECT username FROM users WHERE email=?");
+            $stmt = $this->db->prepare("SELECT username, email FROM users WHERE email=?");
             $stmt->execute([$email]);
-            $username = $stmt->fetchColumn();
+            $userData = $stmt->fetch(PDO::FETCH_ASSOC);
+            
         }
-        return $username;
+        return $userData;
     }
 
 }

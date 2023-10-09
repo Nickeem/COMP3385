@@ -1,6 +1,6 @@
 <?php
 spl_autoload_register();
-include_once './models/RegistrationModel.php';
+include_once '../models/RegistrationModel.php';
 
 class RegistrationController {
     private $model;
@@ -11,11 +11,13 @@ class RegistrationController {
     public function __construct()
     {
         $this->model = new RegistrationModel;
+    }
 
+    public function getData() 
+    {
         $this->username = $_POST['username'];
         $this->password = $_POST['password'];
         $this->email = $_POST['email'];
-
     }
 
     
@@ -46,7 +48,7 @@ class RegistrationController {
         return filter_var($email, FILTER_VALIDATE_EMAIL);
     }
 
-    public function userDataValidation($username, $password, $email) {
+    public function userDataValidation($username, $email, $password) {
         $validation_results = array();
         $validation_results['username'] = $this->model->isUsernameUnique($username);
         $validation_results['password'] = $this->isPasswordValid($password);
@@ -55,18 +57,30 @@ class RegistrationController {
     }
 
     public function index() {
-        $validation_results = $this->userDataValidation($this->username, $this->email, $this->password);
-        if ($validation_results['username'] && $validation_results['email'] && $validation_results['password']) 
-        { // everything is valid
-            // create user 
-            // go to login page
-            echo 'go to login page';
+        if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['username']) && isset($_POST['email']) && isset($_POST['password']) ) 
+        {
+            $this->getData();
+            $validation_results = $this->userDataValidation($this->username, $this->email, $this->password);
+            
+            if ($validation_results['username'] && $validation_results['email'] && $validation_results['password']) 
+            { // everything is valid
+                // create user 
+                $this->model->register($this->username, $this->email, $this->password);
+                // go to login page
+                header('Location: ../Login/') ;
+            }
+            else 
+            {
+                // show registration page with failure info
+                $validation_results;
+                include_once '../views/registration.php';
+                
+            }
         }
-        else {
-            // show registration page with failure info
-            $validation_results;
-            include_once './views/registration.php';
-        }
+        else 
+        {
+            include_once '../views/registration.php';
+        }   
         
     }
 

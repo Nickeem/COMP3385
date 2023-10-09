@@ -1,6 +1,6 @@
 <?php
 
-require_once '../models/DashboardModel.php';
+require_once './models/DashboardModel.php';
 
 class DashboardController {
     private $model;
@@ -14,7 +14,15 @@ class DashboardController {
 
     public function index()
     {
-        $accessLevel = $this->model->fetchPermissions($_SESSION['email']);
+        session_start();
+        if (isset($_SESSION['username']) && isset($_SESSION['username'])) {
+            $accessLevel = $this->model->fetchPermissions($_SESSION['email']);
+            include('./views/Dashboard.php');
+        }
+        else {
+           header('Location: ./Login/');
+        }
+        
         
     }
 }

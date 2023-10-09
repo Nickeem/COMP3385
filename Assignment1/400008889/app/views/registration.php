@@ -23,14 +23,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../css/pico.min.css">
-    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../../css/pico.min.css">
+    <link rel="stylesheet" href="../../css/style.css">
     <title>Registration</title>
 </head>
 <body>
     <main class="container">
         <h1>Registration</h1>
-    <form action="index.php" method="post">
+    <form action="./" method="post">
         
 
         <fieldset>
@@ -57,7 +57,11 @@
        
         <div class="grid">
         <div></div>
-        <input type="submit"  value="Register" role="button">
+        <div>
+            <input type="submit"  value="Register" role="button">
+            <p><a href="../Login/">Login</a></p>
+        </div>
+        
         <div></div>
         </div>
      

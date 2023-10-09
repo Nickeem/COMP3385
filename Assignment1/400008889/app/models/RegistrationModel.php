@@ -11,12 +11,17 @@ class RegistrationModel extends Model {
         $this->connect(); 
      } // constructor
 
-     public function register($username, $password, $email) 
+     public function register($username, $email, $password) 
      {
         // for now assume everything that is passed is validated
         $hashed_password = password_hash($password, PASSWORD_DEFAULT);
         $stmt = $this->db->prepare("INSERT INTO users(username, password, email) VALUES (?, ?, ?) ");
         $stmt->execute([$username, $hashed_password, $email]); 
+
+
+        $permission = "Research Group Manager";
+        $stmt = $this->db->prepare("INSERT INTO user_access_levels(email, 	AccessLevel) VALUES (?, ?) ");
+        $stmt->execute([$email, $permission]); 
         
         return $this->isUsernameUnique($username); // this would determine if the user was created successfully
 
