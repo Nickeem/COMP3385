@@ -47,6 +47,9 @@ class LoginController {
     public function index()
     {
         session_start();
+        if (isset($_SESSION['loggedin']) && isset($_SESSION['email']) && isset($_SESSION['username'])) {
+            header('Location: ../');
+        }
         if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['email']) && isset($_POST['password']) ) 
         {
             $this->getData();

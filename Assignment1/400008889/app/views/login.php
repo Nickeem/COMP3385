@@ -22,14 +22,32 @@
     <main class="container">
         <h1>Login</h1>
         <form action="./" method="post">
-            <label for="email">Enter Email </label>
-            <input type="email" name="email" id="email" required>
 
+            <div class="grid">
+                <div></div>
+                <div>
+                    <label for="email">Enter Email </label>
+                    <input type="email" name="email" id="email" required>
+                </div>
+                <div></div>
+            </div>
+        
 
-            <label for="password">Enter password </label>
-            <input type="password"  name="password" id="password" required>     
+            <div class="grid">
+                <div></div>
+                <div>
+                    <label for="password">Enter password </label>
+                    <input type="password"  name="password" id="password" required>   
+                </div>
+                <div></div>
+            </div>
 
-            <small class="error password "> <?php echo $login_error ?></small>
+              
+            <div class="grid">
+                <div></div>
+                <div><small class="login-error error"> <?php echo $login_error."<br>" ?></small></div>
+                <div></div>
+            </div>
 
             <div class="grid">
                 <div></div>
@@ -40,16 +58,19 @@
                     </p>
                     
                 </div>
-                
                 <div></div>
             </div>
+
         </form>
     </main>
     
+    <script>
+        document.querySelectorAll('input').forEach(element => {
+            element.addEventListener('input', (event) => {
+                document.querySelector('.login-error').innerHTML = '';
+            })
+        });
+    </script>
 
-
-            
-        
-    </form>
 </body>
 </html>

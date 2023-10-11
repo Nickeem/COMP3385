@@ -1,5 +1,6 @@
 .error {
     color: firebrick;
+    padding-bottom: 5px;
 }
 
 
@@ -56,4 +57,8 @@ header > .flex-container {
 
 header {
     padding: 20px !important;
+}
+
+.infinity {
+    font-size: 50px;
 }

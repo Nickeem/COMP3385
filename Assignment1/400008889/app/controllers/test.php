@@ -27,14 +27,5 @@ function isPasswordValid($password) : bool {
     return $is_10_characters && $contains_upper && $contains_digit;
 }
 
-
-$email = "valid_email@hotmail.com";
-$password = "Password12345";
-if(isPasswordValid($password))
-{
-    echo "Valid password";
-}
-else 
-{
-    echo "Invalid email";
-}
+$password = "password";
+echo __DIR__;

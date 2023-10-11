@@ -4,14 +4,12 @@ spl_autoload_register();
 
 class RegistrationModel extends Model {
 
-     //private $db; 
-
      public function __construct()
      {
         $this->connect(); 
      } // constructor
 
-     public function register($username, $email, $password) 
+     public function register($username, $email, $password, $permission) 
      {
         // for now assume everything that is passed is validated
         $hashed_password = password_hash($password, PASSWORD_DEFAULT);
@@ -19,7 +17,7 @@ class RegistrationModel extends Model {
         $stmt->execute([$username, $hashed_password, $email]); 
 
 
-        $permission = "Research Group Manager";
+        
         $stmt = $this->db->prepare("INSERT INTO user_access_levels(email, 	AccessLevel) VALUES (?, ?) ");
         $stmt->execute([$email, $permission]); 
         
