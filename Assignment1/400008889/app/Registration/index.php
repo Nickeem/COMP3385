@@ -1,6 +1,23 @@
 <?php
-spl_autoload_register();
-include_once '../controllers/RegistrationController.php';
+spl_autoload_register(function($className) 
+{
+    $directories = [
+        './controllers/',
+        '../controllers/',
+        '../../controllers/'
+    ];
+
+    foreach ($directories as $directory) {
+        $classFile = $directory . $className . '.php';
+
+        if (file_exists($classFile)) {
+            require_once $classFile;
+            return;
+        }
+    }
+});
+
+
 // in the future this index page 'app/' will act as home
 
 // then there will be routes accordingly

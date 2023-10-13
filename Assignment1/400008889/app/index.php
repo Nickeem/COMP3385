@@ -1,6 +1,23 @@
 <?php
-spl_autoload_register();
-include_once './controllers/DashboardController.php';
+spl_autoload_register(function($className) 
+{
+    $directories = [
+        './controllers/',
+        '../controllers/',
+        '../../controllers/'
+    ];
+
+    foreach ($directories as $directory) {
+        $classFile = $directory . $className . '.php';
+
+        if (file_exists($classFile)) {
+            require_once $classFile;
+            return;
+        }
+    }
+});
+
+
 // in the future this index page 'app/' will act as home
 
 $controller = new DashboardController;

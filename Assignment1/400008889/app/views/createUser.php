@@ -24,27 +24,48 @@
 
         <div class="container">
             <h1>Create User</h1>
-            <form action="" method="POST">
-                <label for="username">
-                    Enter Username: 
-                    <input type="text" id="username" name="username" placeholder="Username" required  <?php if ($username_error != '') {echo "aria-invalid=\"true\"";} ?>>
-                    <small class="error username <?php if ($username_error != '') {echo 'show';}?>"> <?php echo $username_error ?> </small>
-                </label>
-        
-                <label for="email">
-                    Enter Email: 
-                    <input type="email" id="email" name="email" placeholder="Email" required <?php if ($email_error != '') {echo "aria-invalid=\"true\"";}?>  >
-                    <small class="error email <?php if ($email_error != '') {echo 'show';}?>"> <?php echo $email_error ?></small>
-                </label>
-     
-    
-                <label for="password">
-                    Enter password:
-                    <input type="password" id="password" name="password" placeholder="Password" required <?php if ($email_error != '') {echo "aria-invalid=\"true\"";}?>>
-                    <small class="error password <?php if ($email_error != '') {echo 'show';}?>"> <?php echo $password_error ?></small>
-                </label>
+            <form action="./" method="POST">
 
-                <label for="roles">Role:</label>
+            <div class="grid">
+                <div></div>
+                <div>
+                    <label for="username">
+                        Enter Username: 
+                        <input type="text" id="username" name="username" placeholder="Username" required  <?php if ($username_error != '') {echo "aria-invalid=\"true\"";} ?>>
+                        <small class="error username "> <?php echo $username_error ?> </small>
+                    </label>
+                </div>
+                <div></div>
+            </div>
+            
+            <div class="grid">
+                <div></div>
+                <div>
+                    <label for="email">
+                        Enter Email: 
+                        <input type="email" id="email" name="email" placeholder="Email" required <?php if ($email_error != '') {echo "aria-invalid=\"true\"";}?>  >
+                        <small class="error email "> <?php echo $email_error ?></small>
+                    </label>
+                </div>
+                <div></div>
+            </div>
+            
+            <div class="grid">
+                <div></div>
+                <div>
+                    <label for="password">
+                        Enter password:
+                        <input type="password" id="password" name="password" placeholder="Password" required <?php if ($email_error != '') {echo "aria-invalid=\"true\"";}?>>
+                        <small class="error password "> <?php echo $password_error ?></small>
+                    </label>
+                </div>
+                <div></div>
+            </div>
+            
+            <div class="grid">
+                <div></div>
+                <div>
+                    <label for="roles">Role:</label>
                     <select id="roles" name="role" required>
                         <?php 
                             foreach ($roles as $role)
@@ -53,6 +74,18 @@
                             }   
                         ?>
                 </select>
+                </div>
+                <div></div>
+            </div>
+
+                
+        
+                
+     
+    
+                
+
+                
 
                 <div class="grid">
                     <div></div>

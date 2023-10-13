@@ -32,25 +32,45 @@
         <h1>Registration</h1>
     <form action="./" method="post">
         
-
-        <label for="username">
-            Enter Username: 
-            <input type="text" id="username" name="username" placeholder="Username" required  <?php if ($username_error != '') {echo "aria-invalid=\"true\"";} ?>>
-            <small class="error-username error"> <?php echo $username_error ?> </small>
-        </label>
+        <div class="grid">
+            <div></div>
+            <div>
+                <label for="username">
+                    Enter Username: 
+                    <input type="text" id="username" name="username" placeholder="Username" required  <?php if ($username_error != '') {echo "aria-invalid=\"true\"";} ?>>
+                    <small class="error-username error"> <?php echo $username_error ?> </small>
+                </label>
+            </div>
+            <div></div>
+        </div>
         
-        <label for="email">
-            Enter Email: 
-            <input type="email" id="email" name="email" placeholder="Email" required <?php if ($email_error != '') {echo "aria-invalid=\"true\"";}?>  >
-            <small class="error-email error"> <?php echo $email_error ?></small>
-        </label>
+        
+        <div class="grid">
+            <div></div>
+            <div>
+                <label for="email">
+                    Enter Email: 
+                    <input type="email" id="email" name="email" placeholder="Email" required <?php if ($email_error != '') {echo "aria-invalid=\"true\"";}?>  >
+                    <small class="error-email error"> <?php echo $email_error ?></small>
+                </label>
+            </div>
+            <div></div>
+        </div>
+        
      
-    
-        <label for="password">
-            Enter password:
-            <input type="password" id="password" name="password" placeholder="Password" required <?php if ($email_error != '') {echo "aria-invalid=\"true\"";}?>>
-            <small class="error-password error"> <?php echo $password_error ?></small>
-        </label>
+        
+        <div class="grid">
+            <div></div>
+            <div>
+                <label for="password">
+                    Enter password:
+                    <input type="password" id="password" name="password" placeholder="Password" required <?php if ($password_error != '') {echo "aria-invalid=\"true\"";}?>>
+                    <small class="error-password error"> <?php echo $password_error ?></small>
+                </label>
+            </div>
+            <div></div>
+        </div>
+       
        
         <div class="grid">
         <div></div>

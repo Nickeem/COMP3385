@@ -1,6 +1,24 @@
 <?php
 
-require_once './models/DashboardModel.php';
+spl_autoload_register(function($className) 
+{
+    $directories = [
+        './models/',
+        '../models/',
+        '../../models/'
+    ];
+
+    foreach ($directories as $directory) {
+        $classFile = $directory . $className . '.php';
+
+        if (file_exists($classFile)) {
+            require_once $classFile;
+            return;
+        }
+    }
+});
+
+//require_once './models/DashboardModel.php';
 
 class DashboardController {
     private $model;
