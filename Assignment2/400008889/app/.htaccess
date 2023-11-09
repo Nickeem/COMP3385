@@ -1,0 +1,6 @@
+RewriteEngine on
+
+RewriteBase /COMP3385/COMP3385/Assignment2/400008889/app/
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.+)$ index.php?path=$1 [QSA,L]
