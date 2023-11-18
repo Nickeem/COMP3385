@@ -1,4 +1,5 @@
 <?php
+namespace Utility;
 include_once 'C:\xampp\htdocs\COMP3385\COMP3385\Assignment2\400008889\framework/autoload.php';
 
 class TemplateEngine {
@@ -20,7 +21,7 @@ class TemplateEngine {
         }
         else
         {
-            // throw error
+            throw new \Exceptions\TemplateEngineFileException("File does not exist: '$templateFile'");
         }
     }
     

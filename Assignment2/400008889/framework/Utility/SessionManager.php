@@ -1,4 +1,5 @@
 <?php
+namespace Utility;
 class SessionManager 
 {
     public static function start()
@@ -19,6 +20,10 @@ class SessionManager
     
     public static function get($name)
     {
+        if (!isset($_SESSION[$name]))
+        {
+            throw new \Exceptions\SessionManagerException("Session variable '$name' was not set");
+        }
         return $_SESSION[$name];
     }
 }

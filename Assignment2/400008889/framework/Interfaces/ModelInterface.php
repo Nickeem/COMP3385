@@ -1,8 +1,9 @@
 <?php 
+namespace Interfaces;
 interface ModelInterface {	
 	public function connect($host, $database, $username, $password);
-	public function create($table, $filter);
-	public function get($table, $fields, $filter);
-	public function update($table, $field, $value, $filter);
-	public function remove($table, $filter);
+	public function create();
+	public function get();
+	public function update();
+	public function remove();
 }

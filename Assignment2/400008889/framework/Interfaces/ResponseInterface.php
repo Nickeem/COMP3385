@@ -1,5 +1,5 @@
 <?php
-
+namespace Interfaces;
 interface ResponseInterface {
-    public function index();
+    public function execute();
 }

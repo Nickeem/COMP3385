@@ -1,8 +1,8 @@
-
 <?php 
+namespace Abstracts;
 include_once 'C:\xampp\htdocs\COMP3385\COMP3385\Assignment2\400008889\framework/autoload.php';
 
-abstract class Router implements RouterInterface {
+abstract class Router implements \Interfaces\RouterInterface {
     // attributes
     protected $routes;
 
@@ -15,13 +15,13 @@ abstract class Router implements RouterInterface {
     {
         if(isset($this->routes[$path])) 
         {
-            throw new Exception("Route '{$path} already exists'");
+            throw new \Exceptions\RouteException("Route '{$path}' already exists");
         }
 
         // handler should either be a function or array containing class and method. In any case it should be callable
         if (!is_callable($handler))
         {
-            throw new Exception("handler passed to 'addRoute' is invalid"); 
+            throw new \Exceptions\RouteException("handler passed to 'addRoute' is invalid, handler must be callable"); 
         }
         
         $this->routes[$path] = $handler;
@@ -32,7 +32,7 @@ abstract class Router implements RouterInterface {
         if(!isset($this->routes[$path])) 
         {
             // throw exception
-            throw new Exception("No route with path: '$path'");
+            throw new \Exceptions\RouteException("No route with path: '$path'");
         }
         // be aware of paths like /api/user/token - may want to unpack
         $callback = $this->routes[$path];
@@ -47,14 +47,13 @@ abstract class Router implements RouterInterface {
         {
             $message = "'$path' does not exist and was not removed.";
             trigger_error($message, E_USER_WARNING);
-            return;
+
         }
-        unset($this->routes[$path]);
+        else 
+        {
+            unset($this->routes[$path]);
+        }
         
-    }
-    
-    public function execute()
-    {
         
     }
 
@@ -65,8 +64,20 @@ abstract class Router implements RouterInterface {
         // $this->route($path);
 
         $raw_path = $_SERVER['REQUEST_URI']; // doing it this way lets the function not be rule dependent - my own assumption.
+
+        // clean raw_path
+        // Remove trailing slashes
+        $cleaned_path = trim($raw_path,'/');
+        // Remove query parameters
+        $urlParts = explode('?', $cleaned_path);   
+        $path = $urlParts[0];
+        // add slash to the start of slash to act as root
+        $path = '/' . $path;
+        // Remove redundant slashes
+        $path = preg_replace('#/{2,}#', '/', $path);
+
         $search = '/'.preg_quote(APP_URI, '/').'/';
-        $path = preg_replace($search, '', $raw_path, 1); // remove first occurence of
+        $path = preg_replace($search, '', $path, 1); 
         $this->route($path);
     }
 

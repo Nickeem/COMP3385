@@ -2,6 +2,7 @@
 include_once 'C:\xampp\htdocs\COMP3385\COMP3385\Assignment2\400008889\framework/config.php';
 spl_autoload_register(function($className) 
 {
+    $className = str_replace('\\', '/', $className);
     if (!defined('APP_DIR')) 
     {
         define('APP_DIR', 'C:\xampp\htdocs\COMP3385\COMP3385\Assignment2\400008889\app');

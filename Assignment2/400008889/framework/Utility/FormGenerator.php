@@ -1,4 +1,5 @@
 <?php
+namespace Utility;
 
 final class FormGenerator {
     private $formAttributes = [];
