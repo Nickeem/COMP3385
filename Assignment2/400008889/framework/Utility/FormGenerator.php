@@ -4,6 +4,7 @@ namespace Utility;
 final class FormGenerator {
     private $formAttributes = [];
     private $fields = [];
+    private $html = "";
 
     public function addAttribute($name, $value) {
         $this->formAttributes[$name] = $value;
@@ -46,6 +47,11 @@ final class FormGenerator {
         $html .= "<input type=\"submit\" value=\"Submit\"></form>";
     
         return $html;
+    }
+
+    public function saveForm($fileName, $filePath)
+    {
+        
     }
 
 }
