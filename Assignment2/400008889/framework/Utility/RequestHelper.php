@@ -2,7 +2,7 @@
 
 namespace Utility;
 
-final class Request {
+final class RequestHelper {
     private $method;
     private $uri;
     private $headers;
@@ -31,13 +31,13 @@ final class Request {
         return $this->data;
     }
 
-    public function get($name) {
-        if (isset($this->data[$name])) {
-            return $this->data[$name];
-        } 
-        else 
-        {
-            throw new \Exception('No key passed under "'. $name .'"');
-        }
+    public function getRequest()
+    {
+        return [
+            'method'=> $this->method,
+            'uri'=> $this->uri,
+            'headers'=> $this->headers,
+            'params'=> $this->data
+        ];
     }
 }

@@ -1,8 +1,12 @@
 <?php 
 namespace Abstracts;
+
+use Utility\RequestHelper;
+
 include_once 'C:\xampp\htdocs\COMP3385\COMP3385\Assignment2\400008889\framework/autoload.php';
 
-abstract class Router implements \Interfaces\RouterInterface {
+abstract class Router implements \Interfaces\RouterInterface 
+{
     // attributes
     protected $routes;
 
@@ -34,12 +38,26 @@ abstract class Router implements \Interfaces\RouterInterface {
             // throw exception
             throw new \Exceptions\RouteException("No route with path: '$path'");
         }
+
+        $request = new \Utility\RequestHelper();
+        $requestInfo = $request->getRequest(); // get request
         // be aware of paths like /api/user/token - may want to unpack
         $callback = $this->routes[$path];
-        // callback can be function or array that includes
-        // $params = [5, 3]; // Parameters
-        call_user_func($callback);
-    } // route
+
+        // callback can be function or array that includes class name and method
+        if (is_array($callback ))
+        {
+            // $params = [5, 3]; // Parameters
+            $class = new $callback[0]();
+            $method = $callback[1];
+            call_user_func(array($class, $method), $requestInfo);
+        }
+        else
+        {
+            call_user_func($callback, $requestInfo);
+        }
+    }
+         // route
 
     public function removeRoute($path)
     {
@@ -57,7 +75,7 @@ abstract class Router implements \Interfaces\RouterInterface {
         
     }
 
-    public function handle() 
+    public function execute() 
     {
         // $request = $_REQUEST;
         // $path = $_REQUEST['path'];
@@ -82,3 +100,5 @@ abstract class Router implements \Interfaces\RouterInterface {
     }
 
 }
+
+

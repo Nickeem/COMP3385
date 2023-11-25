@@ -7,5 +7,5 @@ interface RouterInterface {
     public function addRoute($path, $handler);
     public function removeRoute($route);
     public function route($path);
-    public function handle();  
+    public function execute();  
 }

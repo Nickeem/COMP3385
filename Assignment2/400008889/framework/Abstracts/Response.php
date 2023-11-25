@@ -6,7 +6,14 @@ abstract class Response implements \Interfaces\ResponseInterface, \Interfaces\Au
 {
     protected $session;
     protected $isAuth;
+    protected $request;
+
     abstract public function execute();
+    public function executeHelper($request) // sets request before executing
+    {
+        $this->request = $request;
+        $this->execute();
+    }
 
     abstract public function auth();
     public function isAuth() : bool
