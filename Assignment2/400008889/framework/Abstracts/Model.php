@@ -9,7 +9,7 @@ abstract class Model implements \Interfaces\ModelInterface
     private $database;
     private $username;
     private $password;
-    protected $db;
+    protected $db = null;
     protected $table; // table required for querying
     protected $select = '*'; // fields to be selected in get operation
     protected $fields = '';  // fields to be updated in update operation
@@ -19,7 +19,7 @@ abstract class Model implements \Interfaces\ModelInterface
     protected $setFields = []; // array of fields used in update operations
     protected $where = []; // array of conditions used in get
     protected $orderBy = []; // array of strings in format "FIELD DIRECTION"
-    protected int $limit; // 
+    protected ?int $limit = null; // 
 
 
     public function __construct($table)
@@ -98,7 +98,7 @@ abstract class Model implements \Interfaces\ModelInterface
 
     public function limit(int $limit) 
     {
-        if ($limit <  -1)
+        if ($limit <  0)
         {
             throw new \Exceptions\ModelQueryDesignerException("Invalid limit passed to 'limit': $limit");
         } 
@@ -120,6 +120,7 @@ abstract class Model implements \Interfaces\ModelInterface
     }
 
     public function get() {
+        $this->checkConnection();
         $query = "SELECT $this->select FROM $this->table";
         
         if (!empty($this->where)) {
@@ -130,7 +131,7 @@ abstract class Model implements \Interfaces\ModelInterface
             $query .= " ORDER BY " . implode(", ", $this->orderBy);
         }
 
-        if ($this->limit !== null) {
+        if ($this->limit != null) {
             $query .= " LIMIT $this->limit";
         }
         // echo $query;
@@ -140,6 +141,7 @@ abstract class Model implements \Interfaces\ModelInterface
     }
     
     public function create() {
+        $this->checkConnection();
         $query = "INSERT INTO $this->table($this->fields) ";
 
         $value_placeholders =  array_fill(0, count($this->insertValues), '?');
@@ -155,6 +157,7 @@ abstract class Model implements \Interfaces\ModelInterface
     }
     
     public function update() {
+        $this->checkConnection();
         $query = "UPDATE $this->table SET ";
         $query .= implode(', ', $this->setFields);
         
@@ -170,6 +173,7 @@ abstract class Model implements \Interfaces\ModelInterface
     
     public function remove() 
     {
+        $this->checkConnection();
         $query = "DELETE FROM $this->table";
         if (!empty($this->where)) {
             $query .= " WHERE " . implode(" AND ", $this->where);
@@ -183,6 +187,15 @@ abstract class Model implements \Interfaces\ModelInterface
         $this->clear();
     }
 
+    private function raiseConnectionError() {
+        throw new \Exceptions\ModelConnectionException("No connection was made to a database");
+    }
+    private function checkConnection() {
+        if ($this->db == null)
+        {
+            $this->raiseConnectionError();
+        }
+    }
 }
 
 
