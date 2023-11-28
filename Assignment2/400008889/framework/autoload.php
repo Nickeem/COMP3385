@@ -13,10 +13,25 @@ spl_autoload_register(function($className)
 
     $framework_directories = [
         '/',
-        '/AbstractClasses/',
+        '/Abstracts/',
         '/Interfaces/',
+        '/Exceptions/',
+        '/Utility/',
 
     ];
+
+    $app_directories = [
+        '/'
+        ,'/Controllers/'
+        ,'/Models/'
+        ,'/View/'
+
+    ];
+
+    if(file_exists(FRAMEWORK_DIR . '/' . $className . 'php' )) 
+    {
+        require FRAMEWORK_DIR . '/' . $className . 'php';
+    }
 
     foreach ($framework_directories as $directory) {
         $classFile = FRAMEWORK_DIR . $directory . $className . '.php';
@@ -27,9 +42,25 @@ spl_autoload_register(function($className)
         }
     }
 
-    if(file_exists(FRAMEWORK_DIR . '/' . $className . 'php' )) 
-    {
-        require FRAMEWORK_DIR . '/' . $className . 'php';
+    foreach ($app_directories as $directory) {
+        $classFile = APP_DIR . $directory . $className . '.php';
+
+        if (file_exists($classFile)) {
+            require_once $classFile;
+            return;
+        }
     }
+    
+    foreach ($app_directories as $directory) {
+        $classFile = ROOT_DIR . $directory . $className . '.php';
+
+        if (file_exists($classFile)) {
+            require_once $classFile;
+            return;
+        }
+    }
+
+
+    
     // trigger_error
 });
