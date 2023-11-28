@@ -2,26 +2,33 @@
 namespace Utility;
 trait SessionManager 
 {
-    public static function startSession()
+    public function startSession()
     {
-        session_start();
-        ini_set('session.gc_maxlifetime', 3600); // session life set to 3600 seconds
+        if (session_status() == PHP_SESSION_NONE) {
+            session_start();
+            //ini_set('session.gc_maxlifetime', 3600); // session life set to 3600 seconds
+        }      
     }
 
-    public static function endSession()
+    public function endSession()
     {
+        $this->startSession();
+        session_unset();
         session_destroy();
+        session_write_close();
+        setcookie(session_name(),'',0,'/');
+        session_regenerate_id(true);
     }
 
-    public static function session_set($name, $value)
+    public function session_set($name, $value)
     {
-        session_start();
+        $this->startSession();
         $_SESSION[$name] = $value;
     }
     
-    public static function session_get($name)
+    public function session_get($name)
     {
-        session_start();
+        $this->startSession();
         if (!isset($_SESSION[$name]))
         {
             throw new \Exceptions\SessionManagerException("Session variable '$name' was not set");
