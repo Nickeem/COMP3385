@@ -24,16 +24,18 @@ final class TemplateEngine {
 
     public function render($templateFile)
     {
-        if (file_exists($this->templatePath + $templateFile))
+        $lastCharacter = substr($this->templatePath, -1);
+        $separator = ($lastCharacter === '/' || $lastCharacter === '\\') ? '' : '/';
+        if (file_exists($this->templatePath . $separator. $templateFile))
         {
             ob_start();       
-            extract($templateData);
-            include($templateFile);
+            extract($this->templateData);
+            include($this->templatePath . $separator. $templateFile);
             return ob_end_flush();
         }
         else
         {
-            throw new \Exceptions\TemplateEngineFileException("File does not exist: '$templateFile'");
+            throw new \Exceptions\TemplateEngineFileException("File does not exist: '$this->templatePath $templateFile'");
         }
     }
     
