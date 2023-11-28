@@ -8,6 +8,7 @@ final class TemplateEngine {
 
     public function __construct($templatePath) {
         $this->templatePath = $templatePath;
+        $this->templateData = array();
     }
     
     public function setTemplatePath($templatePath) {

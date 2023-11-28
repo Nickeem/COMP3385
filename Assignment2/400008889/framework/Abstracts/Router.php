@@ -50,7 +50,6 @@ abstract class Router implements \Interfaces\RouterInterface
         
         if (!$isCallable)
         {
-            var_dump($handler);
             throw new \Exceptions\RouteException("handler passed to 'addRoute' is invalid, handler must be callable"); 
         }
         
@@ -122,6 +121,7 @@ abstract class Router implements \Interfaces\RouterInterface
 
         $search = '/^'.preg_quote($this->root_uri, '/').'/';
         $path = preg_replace($search, '', $path, 1); 
+        $path = ($path == '') ? '/' : $path;
         $this->route($path);
     }
 

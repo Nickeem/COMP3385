@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace App\Controllers;
 
 class AppErrorHandler extends \Abstracts\RuntimeErrorHandler {
     public function __construct() {

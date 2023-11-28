@@ -16,12 +16,18 @@ abstract class RuntimeErrorHandler {
     public static function handleError($errno, $errstr, $errfile, $errline) {
         // Handle non-fatal errors (warnings, notices, etc.)
         error_log("Error: [$errno] $errstr in $errfile on line $errline");
+        echo "Error: [$errno] $errstr in $errfile on line $errline";
         // You can customize the error handling logic here
     }
 
     public static function handleException($exception) {
         // Handle uncaught exceptions
-        error_log("Uncaught Exception: " . $exception->getMessage());
+        error_log("Uncaught ".get_class($exception) . ": " . $exception->getMessage());
+        echo ("Uncaught Exception: " . $exception->getMessage()) . "<br>";
+        echo "Code: " . $exception->getCode() . "<br>";
+        echo "File: " . $exception->getFile() . "<br>";
+        echo "Line: " . $exception->getLine() . "<br>";
+        echo "Trace:\n" . $exception->getTraceAsString() . "\n";
         // You can customize the exception handling logic here
     }
 
