@@ -2,6 +2,7 @@
 include 'C:\xampp\htdocs\COMP3385\COMP3385\Assignment2\400008889\framework/autoload.php';
 
 
+$errorHandler = new \App\AppErrorHandler();
 $router = new \App\Controllers\AppRouter(APP_URI);
 $router->execute();
 

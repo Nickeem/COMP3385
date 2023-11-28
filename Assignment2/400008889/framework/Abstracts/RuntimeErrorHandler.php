@@ -1,6 +1,6 @@
 <?php
-
-abstract class ErrorHandler {
+namespace Abstracts;
+abstract class RuntimeErrorHandler {
     protected $errorLevel;
 
     public function __construct($errorLevel) {

@@ -1,7 +1,7 @@
 <?php
 namespace App\Models;
 
-include_once 'C:\xampp\htdocs\COMP3385\COMP3385\Assignment2\400008889\framework/autoload.php';
+//include_once 'C:\xampp\htdocs\COMP3385\COMP3385\Assignment2\400008889\framework/autoload.php';
 
 class Users extends \Abstracts\Model
 {

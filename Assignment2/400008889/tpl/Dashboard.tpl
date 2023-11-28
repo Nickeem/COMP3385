@@ -56,7 +56,7 @@
             <?php
                 if ($CreateNewResearcher_allowed)
                 {
-                    echo '<div ><a href="./CreateUser/" role="button" class="contrast outline">Create New Researchers</a></div>';
+                    echo '<div ><a href="#" role="button" class="contrast outline">Create New Researchers</a></div>';
                 }
             ?>     
             

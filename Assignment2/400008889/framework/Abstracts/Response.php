@@ -1,6 +1,6 @@
 <?php
 namespace Abstracts;
-include_once 'C:\xampp\htdocs\COMP3385\COMP3385\Assignment2\400008889\framework/autoload.php';
+//include_once 'C:\xampp\htdocs\COMP3385\COMP3385\Assignment2\400008889\framework/autoload.php';
 
 abstract class Response implements \Interfaces\ResponseInterface, \Interfaces\AuthenticatorInterface, \Interfaces\SessionInterface
 {
