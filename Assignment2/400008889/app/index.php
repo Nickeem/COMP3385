@@ -2,7 +2,8 @@
 include 'C:\xampp\htdocs\COMP3385\COMP3385\Assignment2\400008889\framework/autoload.php';
 
 
-var_dump($_POST);
+$router = new \App\Controllers\AppRouter(APP_URI);
+$router->execute();
 
 
 
