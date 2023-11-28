@@ -10,12 +10,13 @@ final class FormGenerator {
         $this->formAttributes[$name] = $value;
     }
 
-    public function addField($type, $name, $label, $attributes = []) {
+    public function addField($type, $name, $label, $attributes = [], $isRequired=false) {
         $field = [
             'type' => $type,
             'name' => $name,
             'label' => $label,
             'attributes' => $attributes,
+            'required'=> $isRequired
         ];
 
         $this->fields[] = $field;
@@ -39,6 +40,9 @@ final class FormGenerator {
     
             foreach ($field['attributes'] as $attrName => $attrValue) {
                 $html .= " $attrName='$attrValue' ";
+            }
+            if ($field['required']) {
+                $html .= " required";
             }
     
             $html .= "><br>";
