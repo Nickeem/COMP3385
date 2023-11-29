@@ -1,5 +1,5 @@
 <?php
-include_once 'C:\xampp\htdocs\COMP3385\COMP3385\Assignment2\400008889\config/config.php';
+# include 'C:\xampp\htdocs\COMP3385\COMP3385\Assignment2\400008889\config/config.php';
 spl_autoload_register(function($className) 
 {
     $className = str_replace('\\', '/', $className);
